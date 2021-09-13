@@ -320,9 +320,11 @@ const updateClock = () => {
     VARS.lastTime = Date.now();
   }
   if (VARS.status === "victory") {
+    scope.playVictoryMusic();
     showVerdict();
     return;
   } else if (VARS.status === "defeat") {
+    scope.playDefeatMusic();
     showVerdict();
     return;
   }
@@ -332,6 +334,7 @@ const updateClock = () => {
 };
 
 const beginClock = () => {
+  scope.playMainMusic();
   updateClock();
 };
 
@@ -472,4 +475,5 @@ scope.startGame = (levelIndex) => {
   console.debug(level);
 
   showWelcomeMenu();
+  
 };
