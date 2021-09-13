@@ -319,6 +319,12 @@ const updateClock = () => {
   } else {
     VARS.lastTime = Date.now();
   }
+  if (VARS.timeLeft <= 0) {
+    calculateObjectives();
+    if (VARS.status !== "victory") {
+      VARS.status = "defeat";
+    }
+  }
   if (VARS.status === "victory") {
     scope.playVictoryMusic();
     showVerdict();
@@ -430,8 +436,7 @@ const sourceClicked = () => {
 };
 
 const startGameClicked = (level) => {
-  // FIXME: Select level
-  scope.startGame(0);
+  scope.startGame(level);
 };
 
 const closeVerdict = () => {
@@ -457,6 +462,8 @@ const showVerdict = () => {
 };
 
 scope.startGame = (levelIndex) => {
+  localStorage.setItem("ocd-relief-js13k--last-level", String(levelIndex));
+
   if (VARS.timeout) {
     clearTimeout(VARS.timeout);
   }
@@ -475,5 +482,4 @@ scope.startGame = (levelIndex) => {
   console.debug(level);
 
   showWelcomeMenu();
-  
 };

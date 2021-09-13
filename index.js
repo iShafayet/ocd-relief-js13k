@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  scope.startGame(0);
+  lastLevel = localStorage.getItem("ocd-relief-js13k--last-level");
+  if (!lastLevel) {
+    lastLevel = "0";
+  }
+  lastLevel = parseInt(lastLevel);
+
+  scope.startGame(lastLevel);
 });
 
 let timeout = null;
